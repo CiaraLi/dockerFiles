@@ -6,6 +6,6 @@ echo "set encoding=utf-8" > ~/.vimrc;\
 mkdir -p /var/data;
 
 WORKDIR /var/data 
-COPY  ./src/* ./ 
+COPY  ./* ./ 
 VOLUME ["/var/logs"]
 CMD [""]

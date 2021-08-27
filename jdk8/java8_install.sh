@@ -1,7 +1,7 @@
 #!/bin/bash
 
 homeDir="/var/data/"
-file="jdk-8u131.tar.gz "
+file="jdk8.tar.gz "
  
 check= `rpm -qa|grep java`
  if [ "$result" != "" ]
