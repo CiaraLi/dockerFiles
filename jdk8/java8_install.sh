@@ -16,7 +16,7 @@ mkdir -p /usr/local/java
 echo "开始安装Java8  doing..." 
 cd  /usr/local/src
 # 复制准备好的文件 
-tar -zxvf  $homeDir$file  
+tar -zxvf  $homeDir/src/$file  
 mv ./jdk1.8.0_301  /usr/local/java/jdk8
 # 备份
 cp /etc/profile /etc/profile.bk.$(date +%F'-'%H'-'%M'-'%S)
