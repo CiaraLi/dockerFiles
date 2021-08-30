@@ -1,11 +1,11 @@
-FROM centos:7
+FROM base
 
 RUN rm -f /etc/localtime && ln -sf  /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ;\
 echo "Hello  Centos --Ciara--"  > /etc/motd ; \
 echo "set encoding=utf-8" > ~/.vimrc;\
-mkdir -p /var/data;
+mkdir -p /var/data/src;
 
 WORKDIR /var/data 
-COPY  ./* ./ 
+COPY  ./src/* ./src/
 VOLUME ["/var/logs"]
-CMD [""]
+CMD ["./src/java8_install.sh"]
