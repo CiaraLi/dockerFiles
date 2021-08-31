@@ -10,7 +10,9 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;\
 rm -f /etc/localtime && ln -sf  /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ;\
-echo "Hello  Centos!   --Ciara--"  > /etc/motd ;
+echo "Hello  Centos --Ciara--"  > /etc/motd ; \
+echo "set encoding=utf-8" > ~/.vimrc;\
+mkdir -p /var/data;
 
-VOLUME [ "/sys/fs/cgroup" ]
+VOLUME ["/sys/fs/cgroup"]
 CMD ["/usr/sbin/init"]
