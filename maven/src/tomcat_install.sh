@@ -46,17 +46,17 @@ tar -zxvf  $homeDir/src/apache-tomcat-10.0.10.tar.gz
 mv $homeDir/src/apache-tomcat-10.0.10  /usr/local/$tomcat 
 chmod +x /usr/local/$tomcat/bin/* 
 #设置账号和服务  提前在src 下面 准备好tomcat-users.xml  server.xml 文件 
-if [ ! -f  "$homeDir/src/tomcat-users.xml" ] 
-then 
-	echo ""
+if [ ! -f  "$homeDir/src/tomcat-users.xml" ]  
+then
+  echo ""
 else
 	rm  -f /usr/local/$tomcat/conf/tomcat-users.xml  && cp $homeDir/src/tomcat-users.xml  /usr/local/$tomcat/conf/ 
 fi
-if [ ! -f  "$homeDir/src/server.xml" ] 
-then 
-	echo ""
+if [ ! -f  "$homeDir/src/server.xml" ]  
+then
+  echo ""
 else
-	rm  -f  /usr/local/$tomcat/conf/server.xml && cp $homeDir/src/server.xml       /usr/local/$tomcat/conf/
+	rm  -f   /usr/local/$tomcat/conf/server.xml && cp $homeDir/src/server.xml       /usr/local/$tomcat/conf/
 fi
 #设置目录
 mv /usr/local/$tomcat/webapps  $homeDir/webapps
