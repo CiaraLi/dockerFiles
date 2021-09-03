@@ -18,7 +18,7 @@ yum install -y  wget
 mkdir -p /usr/local/java  
 echo "开始安装Java8  doing..." 
 # 复制准备好src 的文件jdk-8u141-linux-x64.tar.gz  或者在线下载
-if [ ! ls -f  "$homeDir/src/jdk-8u141-linux-x64.tar.gz"] 
+if [ !  -f  "$homeDir/src/jdk-8u141-linux-x64.tar.gz" ] 
 then
 	 wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz"   
 fi
@@ -38,26 +38,14 @@ echo "Java已成功安装至  /usr/local/java/$jdk 目录  OK ..."
 java -version
 #----安装tomcat ------
 # 复制准备好的文件apache-tomcat-10.0.10.tar.gz  或者在线下载 
-if [ !  ls  -f  "$homeDir/src/apache-tomcat-10.0.10-src.tar.gz"]  
+if [ !   -f  "$homeDir/src/apache-tomcat-10.0.10.tar.gz" ]  
 then
   wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.10/bin/apache-tomcat-10.0.10.tar.gz
 fi
 tar -zxvf  $homeDir/src/apache-tomcat-10.0.10.tar.gz 
 mv $homeDir/src/apache-tomcat-10.0.10  /usr/local/$tomcat 
 chmod +x /usr/local/$tomcat/bin/* 
-#设置账号和服务  提前在src 下面 准备好tomcat-users.xml  server.xml 文件 
-if [ ! -f  "$homeDir/src/tomcat-users.xml" ] 
-then 
-	echo ""
-else
-	rm  -f /usr/local/$tomcat/conf/tomcat-users.xml  && cp $homeDir/src/tomcat-users.xml  /usr/local/$tomcat/conf/ 
-fi
-if [ ! -f  "$homeDir/src/server.xml" ] 
-then 
-	echo ""
-else
-	rm  -f  /usr/local/$tomcat/conf/server.xml && cp $homeDir/src/server.xml       /usr/local/$tomcat/conf/
-fi
+
 #设置目录
 mv /usr/local/$tomcat/webapps  $homeDir/webapps
 ln -s $homeDir/webapps /usr/local/$tomcat/webapps
