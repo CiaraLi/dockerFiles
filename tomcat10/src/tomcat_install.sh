@@ -1,8 +1,7 @@
 #!/bin/bash
 homeDir="/var/data" 
 jdk="java8"
-tomcat="tomcat"
-webapp="webapp"
+tomcat="tomcat" 
 check= `rpm -qa|grep java`
 #-----安装JDK  ------
 # 卸载旧版本  
@@ -51,7 +50,7 @@ mv /usr/local/$tomcat/webapps  $homeDir/webapps
 ln -s $homeDir/webapps /usr/local/$tomcat/webapps
 ln -s $homeDir/logs  /usr/local/tomcat/logs
 echo "Tomcat已成功安装至：/usr/local/$tomcat 目录  
-	  WebApp路径：$homeDir/webapp
+	  WebApp路径：$homeDir/webapps
 	  前台运行： /usr/local/tomcat/bin/catalina.sh run
 	  启动命令： /usr/local/tomcat/bin/catalina.sh start
 	  停止命令： /usr/local/tomcat/bin/catalina.sh  stop

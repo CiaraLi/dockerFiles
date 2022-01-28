@@ -45,23 +45,16 @@
   when reading this file. If you wish to configure these users for use with the
   examples web application, do not forget to remove the <!.. ..> that surrounds
   them. You will also need to set the passwords to something appropriate.
--->
-<!--
-  <role rolename="tomcat"/>
-  <role rolename="role1"/>
-  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
-  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
-  <user username="role1" password="<must-be-changed>" roles="role1"/>
--->
- <role rolename="admin-gui"/>
+--> 
  <!-- tomcat 9不能同时设置admin-script和admin-gui -->
 <!--
  <role rolename="admin-script"/> 
  <role rolename="manager-gui"/>
  <role rolename="manager-script"/>
  <role rolename="manager-jmx"/>
- <role rolename="manager-status"/>
- <user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-script,admin-gui"/>
+ <role rolename="manager-status"/> 
+ Users with the manager-gui role should not be granted either the manager-script or manager-jmx roles.
 -->
- <user username="admin" password="admin" roles="admin-gui "/>
+ <user username="admin" password="admin" roles="admin-gui,manager-gui"/>
+ <user username="robot" password="robot" roles="admin-script,manager-script"/>
 </tomcat-users>
