@@ -16,7 +16,7 @@ fi
 mkdir -p /usr/local/java
 
 # 安装新版本  then
-echo "开始安装Java8  doing..." 
+echo "开始安装Java11  doing..." 
 cd  $homeDir/src
 # 复制准备好的文件 
 tar -zxvf  $homeDir/src/$file  
