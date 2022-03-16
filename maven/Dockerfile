@@ -1,13 +1,14 @@
 #镜像源
 FROM  iongdoc/tomcat
-COPY  ./src/*  /usr/local/src/
 
 RUN  mkdir -p /var/data;\
-/bin/chmod +x /usr/local/src/maven_install.sh;\
-/usr/local/src/maven_install.sh;
+mkdir -p /usr/local/tomcat/conf/Catalina/localhost;
+COPY  ./src/manager.xml      /usr/local/tomcat/conf/Catalina/localhost/manager.xml
+COPY  ./src/server.xml       /usr/local/tomcat/conf/server.xml
+COPY  ./src/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 
 #数据卷 默认，可以在run时重新指定目录  
-VOLUME ["/var/data/webapp/logs/","/var/data/webapps"]
+VOLUME ["/var/data/webapps/logs/","/var/data/webapps"]
 #声明开放端口，需要在run时做映射
 EXPOSE 8088
 CMD ["/usr/local/tomcat/bin/catalina.sh","run"]

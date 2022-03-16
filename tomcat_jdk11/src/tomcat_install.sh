@@ -1,6 +1,6 @@
 #!/bin/bash
 homeDir="/var/data" 
-jdk="java8"
+jdk="java11"
 tomcat="tomcat" 
 check= `rpm -qa|grep java`
 #-----安装JDK  ------
@@ -15,15 +15,10 @@ cd  $homeDir/src
 yum install -y  wget
 # 安装新版本  then
 mkdir -p /usr/local/java  
-echo "开始安装Java8  doing..." 
-# 复制准备好src 的文件jdk-8u141-linux-x64.tar.gz  或者在线下载
-if [ !  -f  "$homeDir/src/jdk-8u141-linux-x64.tar.gz" ] 
-then
-	 wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz"   
-fi
+echo "开始安装Java8  doing..."  
 # 复制准备好的文件 
-tar -zxvf  $homeDir/src/jdk-8u141-linux-x64.tar.gz  
-mv $homeDir/src/jdk1.8.0_141  /usr/local/java/$jdk
+tar -zxvf  $homeDir/src/jdk-11.0.12.tar  
+mv $homeDir/src/jdk-11.0.12  /usr/local/java/$jdk
 # 备份
 cp /etc/profile /etc/profile.bk.$(date +%F'-'%H'-'%M'-'%S)
 # 环境变量
@@ -37,12 +32,8 @@ echo "Java已成功安装至  /usr/local/java/$jdk 目录  OK ..."
 java -version
 #----安装tomcat ------
 # 复制准备好的文件apache-tomcat-10.0.10.tar.gz  或者在线下载 
-if [ !   -f  "$homeDir/src/apache-tomcat-10.0.10.tar.gz" ]  
-then
-  wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.10/bin/apache-tomcat-10.0.10.tar.gz
-fi
-tar -zxvf  $homeDir/src/apache-tomcat-10.0.10.tar.gz 
-mv $homeDir/src/apache-tomcat-10.0.10  /usr/local/$tomcat 
+tar -zxvf  $homeDir/src/apache-tomcat-9.0.60.tar.gz 
+mv $homeDir/src/apache-tomcat-9.0.60  /usr/local/$tomcat 
 chmod +x /usr/local/$tomcat/bin/* 
 
 #设置目录

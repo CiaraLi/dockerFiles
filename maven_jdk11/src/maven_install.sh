@@ -37,10 +37,10 @@ echo "Java已成功安装至  /usr/local/java/$jdk 目录  OK ..."
 java -version
 
 #----安装tomcat ------
-# 复制准备好的文件apache-tomcat-10.0.10.tar.gz  或者在线下载 
+# 复制准备好的文件apache-tomcat-9.0.60.tar.gz  或者在线下载 
 cd  $homeDir/src 
-tar -zxvf  $homeDir/src/apache-tomcat-10.0.10.tar.gz 
-mv $homeDir/src/apache-tomcat-10.0.10  /usr/local/$tomcat 
+tar -zxvf  $homeDir/src/apache-tomcat-9.0.60.tar.gz 
+mv $homeDir/src/apache-tomcat-9.0.60  /usr/local/$tomcat 
 chmod +x /usr/local/$tomcat/bin/* 
 
 #设置目录

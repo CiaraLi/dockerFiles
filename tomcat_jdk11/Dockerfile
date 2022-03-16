@@ -13,5 +13,6 @@ EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh","run"]
 
 
-# 启动命令 docker run -itd   -p 8081:8080  --name tomcat iongdoc/tomcat  
-# docker run -itd  -v  /home/www-data/java/logs/:/var/data/logs/ -p 8082:8080  --name tomcat1 iongdoc/tomcat 
+# 构建 docker build -t tomcat ./
+# 启动命令 docker run -itd   -p 8081:8080  --name tomcat  tomcat  
+# docker run -itd  -v /home/www-data/java/webapps:/var/data/webapps -v /home/www-data/java/logs/:/var/data/logs/ -p 8082:8080  --name tomcat   tomcat 
