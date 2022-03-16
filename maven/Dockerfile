@@ -15,6 +15,6 @@ CMD ["/usr/local/tomcat/bin/catalina.sh","run"]
 
 
 # 构建 docker build -t maven ./ 
-# 启动命令 docker run -itd -v /home/www-data/java/webapps:/var/data/webapps -v /home/www-data/java/logs/:/var/data/logs/ -p 8080:8088  --name maven maven  
+# 启动命令 docker run -itd -v /home/www-data/java/webapps:/var/data/webapps -v /home/www-data/java/logs/:/var/data/logs/ -p 8080:8080  --name maven maven  
 # 访问地址 ： http://127.0.0.1:8080/
  
