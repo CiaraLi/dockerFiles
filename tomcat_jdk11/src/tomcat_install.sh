@@ -17,7 +17,7 @@ yum install -y  wget
 mkdir -p /usr/local/java  
 echo "开始安装Java8  doing..."  
 # 复制准备好的文件 
-tar -zxvf  $homeDir/src/jdk-11.0.12.tar  
+tar -zxvf  $homeDir/src/jdk-11.0.12.tar.gz
 mv $homeDir/src/jdk-11.0.12  /usr/local/java/$jdk
 # 备份
 cp /etc/profile /etc/profile.bk.$(date +%F'-'%H'-'%M'-'%S)
