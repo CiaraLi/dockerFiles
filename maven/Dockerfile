@@ -1,8 +1,10 @@
 #镜像源
 FROM  iongdoc/tomcat
+WORKDIR  /var/data
 
 RUN  mkdir -p /var/data;\
 mkdir -p /usr/local/tomcat/conf/Catalina/localhost;
+
 COPY  ./src/manager.xml      /usr/local/tomcat/conf/Catalina/localhost/manager.xml
 COPY  ./src/server.xml       /usr/local/tomcat/conf/server.xml
 COPY  ./src/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
