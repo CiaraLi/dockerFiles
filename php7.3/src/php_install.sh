@@ -1,5 +1,11 @@
 #!/bin/bash 
 
+homeDir="/tmp" 
+php="php-7.3.5"
+phpDir="/usr/local/php"
+nginx="nginx-1.18.0"  
+nginxDir="/usr/local/nginx"  
+phpredis="phpredis-4.0.2"   
 
 # install relay
 yum -y  install  epel-release   wget    php-pear  autoconf gcc-c++  
@@ -14,25 +20,25 @@ groupadd -r www-data
 useradd www-data -g www-data -s /sbin/nologin  
 		
 # install nginx
-cd /tmp && tar -zxvf nginx-1.18.0.tar.gz 
-cd /tmp/nginx-1.18.0
-./configure --user=nginx --group=nginx --prefix=/usr/local/nginx
+cd ${homeDir} && tar -zxvf ${nginx}.tar.gz 
+cd ${homeDir}/${nginx}
+./configure --user=nginx --group=nginx --prefix=${nginxDir}
 make && make install
 
-mkdir -p /home/www-data  /home/www_logs  /usr/local/nginx/conf/include 
-mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.back
-mv /tmp/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
-mv /tmp/nginx/start.sh /start.sh
+mkdir -p /home/www-data  /home/www_logs  ${nginxDir}/conf/include 
+mv  ${nginxDir}/conf/nginx.conf  ${nginxDir}/conf/nginx.conf.back
+mv  ${homeDir}/nginx/nginx.conf  ${nginxDir}/conf/nginx.conf
+mv  ${homeDir}/nginx/start.sh /start.sh
 chmod +x /start.sh
-mv /tmp/nginx/default.conf /usr/local/nginx/conf/include/default.conf
-mv /tmp/www-data /home/www-docker  
-ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
-/usr/local/nginx/sbin/nginx -t
+mv  ${homeDir}/nginx/default.conf ${nginxDir}/conf/include/default.conf
+mv  ${homeDir}/www-data /home/www-docker  
+ln -s ${nginxDir}/sbin/nginx /usr/local/bin/
+${nginxDir}/sbin/nginx -t
 	
 #install php
-cd /tmp && tar -zxvf php-7.3.5.tar.gz
-cd /tmp/php-7.3.5
-./configure --prefix=/usr/local/php \
+cd ${homeDir} && tar -zxvf ${php}.tar.gz
+cd ${homeDir}/${php}
+./configure --prefix=${phpDir} \
 	    --enable-fpm \
 	    --with-fpm-user=www-data \
 	    --with-fpm-group=www-data \
@@ -84,24 +90,22 @@ cd /tmp/php-7.3.5
 	    --enable-opcache\
 make && make install 
 
-mv /tmp/php/php-fpm.conf /usr/local/php/etc/php-fpm.conf 
-mv /tmp/php/www.conf /usr/local/php/etc/php-fpm.d/www.conf 
-mv /tmp/php/php.ini /usr/local/php/lib/php.ini 
-ln -s /usr/local/php/sbin/php-fpm /usr/local/bin/ 
-ln -s /usr/local/php/bin/php  /usr/local/bin/  
+mv  ${homeDir}/php/php-fpm.conf ${phpDir}/etc/php-fpm.conf 
+mv  ${homeDir}/php/www.conf ${phpDir}/etc/php-fpm.d/www.conf 
+mv  ${homeDir}/php/php.ini  ${phpDir}/lib/php.ini 
+ln -s ${phpDir}/sbin/php-fpm /usr/local/bin/ 
+ln -s ${phpDir}/bin/php  /usr/local/bin/  
 php -v 
 
 
 # install phpredis
-cd /tmp && tar -zxvf phpredis-4.0.2.tar.gz 
-cd /tmp/phpredis-4.0.2	
-/usr/local/php/bin/phpize  
-./configure --with-php-config=/usr/local/php/bin/php-config 
+cd ${homeDir} && tar -zxvf ${phpredis}.tar.gz 
+cd ${homeDir}/${phpredis}	
+${phpDir}/bin/phpize  
+./configure --with-php-config=${phpDir}/bin/php-config 
 make && make install 
-rm -rf /tmp
-yum clean all	
-
-whoami  >>/whoami.txt
+rm -rf  ${homeDir}
+yum clean all
 
 
 	

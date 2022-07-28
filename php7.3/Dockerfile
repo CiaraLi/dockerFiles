@@ -33,3 +33,7 @@ CMD ["/bin/sh","/start.sh","daemon off;"]
 # 构建 docker build -t php7 ./ 
 # 启动命令 docker run -itd -v /Users/tal/docker/php/config:/usr/local/nginx/conf/include -v /Users/tal/docker/php/www-data/:/home/www-data/ -p 80:80  --name php7  php7  
 # 访问地址 ： http://127.0.0.1:8080/
+
+#直接使用镜像
+# export LOCALDIR=/Users/tal/docker/php 
+# docker run -itd -v {$LOCALDIR}/config:/usr/local/nginx/conf/include -v {$LOCALDIR}/www-data/:/home/www-data/ -p 80:80  --name work  iongdoc/php7.3 
