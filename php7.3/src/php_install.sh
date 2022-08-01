@@ -18,8 +18,14 @@ yum -y  install  gmp gmp-devel  libmcrypt libmcrypt-devel readline readline-deve
 
 groupadd -r www-data
 useradd www-data -g www-data -s /sbin/nologin  
-		
-# install nginx
+echo "开始安装Nginx  doing..." 
+cd ${homeDir}
+# install nginx http://nginx.org/download/nginx-1.18.0.tar.gz
+# 复制准备好src 的文件nginx-1.18.0.tar.gz  或者在线下载
+if [ !  -f  "$homeDir/${nginx}.tar.gz" ] 
+then
+	 wget --no-cookies --no-check-certificate   "http://nginx.org/download/nginx-1.18.0.tar.gz"   
+fi
 cd ${homeDir} && tar -zxvf ${nginx}.tar.gz 
 cd ${homeDir}/${nginx}
 ./configure --user=nginx --group=nginx --prefix=${nginxDir}
@@ -34,8 +40,17 @@ mv  ${homeDir}/nginx/default.conf ${nginxDir}/conf/include/default.conf
 mv  ${homeDir}/www-data /home/www-docker  
 ln -s ${nginxDir}/sbin/nginx /usr/local/bin/
 ${nginxDir}/sbin/nginx -t
+echo "安装Nginx  done..." 
 	
-#install php
+
+echo "开始安装PHP  doing..." 
+cd ${homeDir}
+#install php https://www.php.net/distributions/php-7.3.5.tar.gz
+# 复制准备好src 的文件nginx-1.18.0.tar.gz  或者在线下载
+if [ !  -f  "$homeDir/${php}.tar.gz" ] 
+then
+	 wget --no-cookies --no-check-certificate   "https://www.php.net/distributions/php-7.3.5.tar.gz"   
+fi
 cd ${homeDir} && tar -zxvf ${php}.tar.gz
 cd ${homeDir}/${php}
 ./configure --prefix=${phpDir} \
@@ -96,16 +111,23 @@ mv  ${homeDir}/php/php.ini  ${phpDir}/lib/php.ini
 ln -s ${phpDir}/sbin/php-fpm /usr/local/bin/ 
 ln -s ${phpDir}/bin/php  /usr/local/bin/  
 php -v 
+echo "安装PHP done..." 
 
-
+echo "开始安装PHPRedis doing..." 
+cd ${homeDir}
+if [ !  -f  "$homeDir/${phpredis}.tar.gz" ] 
+then
+	 wget --no-cookies --no-check-certificate   "https://codeload.github.com/phpredis/phpredis/tar.gz/refs/tags/4.0.2"   -O  ${phpredis}.tar.gz
+fi
 # install phpredis
 cd ${homeDir} && tar -zxvf ${phpredis}.tar.gz 
 cd ${homeDir}/${phpredis}	
 ${phpDir}/bin/phpize  
 ./configure --with-php-config=${phpDir}/bin/php-config 
 make && make install 
-rm -rf  ${homeDir}
+echo "安装PHPRedis done..." 
+
+rm -rf  ${homeDir}/*
 yum clean all
-
-
-	
+ 
+ 
